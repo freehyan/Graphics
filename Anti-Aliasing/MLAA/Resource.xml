@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TEXTURE type="subconfig"> INPUT_TEXTURE
+  <TEXTURE_PATH type="string"> Unigine01.png </TEXTURE_PATH>
+  <TEXTURE_WRAP type="vecstring"> GL_CLAMP_TO_EDGE GL_CLAMP_TO_EDGE </TEXTURE_WRAP>
+  <TEXTURE_FILTER type="vecstring"> GL_LINEAR GL_LINEAR </TEXTURE_FILTER>
+</TEXTURE>
+
+<TEXTURE type="subconfig"> AREA_TEXTURE
+  <TEXTURE_PATH type="string"> AreaMap32_1.png </TEXTURE_PATH>
+  <TEXTURE_WRAP type="vecstring"> GL_CLAMP_TO_EDGE GL_CLAMP_TO_EDGE </TEXTURE_WRAP>
+  <TEXTURE_FILTER type="vecstring"> GL_NEAREST GL_NEAREST </TEXTURE_FILTER>
+</TEXTURE>
+
+<FRAMEBUFFER type="subconfig">  DEFERRED_FBO
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+ 
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_pos</FBO_ATTACHED_TEXTURE_0>
+    <FBO_ATTACHED_TEXTURE_1 type="vecstring">tex_normal</FBO_ATTACHED_TEXTURE_1>
+    <FBO_ATTACHED_TEXTURE_2 type="vecstring">tex_color</FBO_ATTACHED_TEXTURE_2>
+    <FBO_ATTACHED_TEXTURE_3 type="vecstring">tex_lighting</FBO_ATTACHED_TEXTURE_3>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+<FRAMEBUFFER type="subconfig"> MLAA_FBO
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_edge_detection</FBO_ATTACHED_TEXTURE_0>
+    <FBO_ATTACHED_TEXTURE_1 type="vecstring">tex_blending_weight</FBO_ATTACHED_TEXTURE_1>
+    <FBO_ATTACHED_TEXTURE_2 type="vecstring">tex_antialiasing</FBO_ATTACHED_TEXTURE_2>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>

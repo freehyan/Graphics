@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<WINDOW type="subconfig" name="WINDOW">
+  <WIN_WIDTH type="int">1280</WIN_WIDTH>
+  <WIN_HEIGHT type="int">720</WIN_HEIGHT>
+  <WIN_TITLE type="string">Deferred Shading MLAA</WIN_TITLE>
+  <WIN_TWEAKBAR type="string"> ANTWEAKBAR </WIN_TWEAKBAR>
+</WINDOW>
+
+<CAMERA type="subconfig" name="MAIN_CAMERA">
+  <EYE type="vec3"> 0.0 0.0 3.0 </EYE>
+  <CENTER type="vec3"> 0.0 0.0 0.0</CENTER>
+  <UP type="vec3"> 0.0 1.0 0.0</UP>
+  <PERSPECTIVE type="vec3"> 45.0 0.1 100.0</PERSPECTIVE>
+</CAMERA>
+
+<MODEL type="subconfig" name="SPONZA">
+  <MODEL_FILE type="string">../Resources/Model/sponza/sponza.obj</MODEL_FILE>
+</MODEL>

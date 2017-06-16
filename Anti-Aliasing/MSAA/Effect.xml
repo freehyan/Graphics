@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="MSAA_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  <SHADER1 type="subconfig" name="MSAA_GEOMETRY_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/basicMesh_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/basicMesh_FS.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="MASK_GENERATION_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/ComplexMask_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/ComplexMask_FS.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+
+  <SHADER3 type="subconfig" name="MSAA_LIGHTING_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/Lighting_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/Lighting_FS_Shared.h shaders/Lighting_FS.glsl</FRAGMENT_SHADER>
+  </SHADER3>
+
+  <SHADER4 type="subconfig" name="MSAA_LIGHTING_PERSAMPLE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/Lighting_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/Lighting_FS_Shared.h shaders/Lighting_PerSample_FS.glsl</FRAGMENT_SHADER>
+  </SHADER4>
+
+  <SHADER5 type="subconfig" name="MSAA_LIGHTING_MARK_COMPLEX_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/Lighting_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/MarkComplex_PerSample_FS.glsl</FRAGMENT_SHADER>
+  </SHADER5>
+
+  <SHADER6 type="subconfig" name="NO_MSAA_GEOMETRY_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/basicMesh_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/basicMesh_NoMSAA_FS.glsl</FRAGMENT_SHADER>
+  </SHADER6>
+  
+  <SHADER7 type="subconfig" name="NO_MSAA_LIGHTING_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/Lighting_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/Lighting_FS_Shared.h shaders/Lighting_NoMSAA_FS.glsl</FRAGMENT_SHADER>
+  </SHADER7>
+  
+</EFFECT>

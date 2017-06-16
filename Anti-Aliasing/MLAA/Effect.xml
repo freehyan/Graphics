@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="MLAA_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  
+  <SHADER1 type="subconfig" name="MLAA_GEOMETRY_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/geometry_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/geometry_FS.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="MLAA_LIGHTING_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/DrawFullScreenQuad_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/Lighting_FS.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+  
+  <SHADER3 type="subconfig" name="EDGE_DETECTION_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/DrawFullScreenQuad_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/EdgeDetection_FS.glsl</FRAGMENT_SHADER>
+  </SHADER3>
+
+  <SHADER4 type="subconfig" name="BLENDING_WEIGHT_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/DrawFullScreenQuad_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/BlendingWeight_FS.glsl</FRAGMENT_SHADER>
+  </SHADER4>
+
+  <SHADER5 type="subconfig" name="NEIGHBORHOOD_BLENDING_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/DrawFullScreenQuad_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/Neighborhood_Blending_FS.glsl</FRAGMENT_SHADER>
+  </SHADER5>
+
+  <SHADER6 type="subconfig" name="SHOW_TEXTURE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/DrawFullScreenQuad_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/ShowTexture_FS.glsl</FRAGMENT_SHADER>
+  </SHADER6>
+</EFFECT>
