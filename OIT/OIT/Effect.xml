@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="OIT_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  <SHADER1 type="subconfig" name="OIT_CREATE_LINKEDLIST_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/CreateFragmentLinkedList_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/CreateFragmentLinkedList_FS.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="OIT_TRAVERSE_LINKEDLIST_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/TraverseFragmentLinkedList_VS.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/TraverseFragmentLinkedList_FS.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+  
+</EFFECT>
