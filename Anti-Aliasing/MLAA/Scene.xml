@@ -15,5 +15,5 @@
 </CAMERA>
 
 <MODEL type="subconfig" name="SPONZA">
-  <MODEL_FILE type="string">../Resources/Model/sponza/sponza.obj</MODEL_FILE>
+  <MODEL_FILE type="string">../../Resources/Model/sponza/sponza.obj</MODEL_FILE>
 </MODEL>

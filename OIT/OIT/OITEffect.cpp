@@ -32,7 +32,7 @@ void COITEffect::_initEffectV()
 	m_pInputTransformer->setMotionMode(Cooler::SCameraMotionType::FIRST_PERSON);
 	m_ProjectionMatrix = glm::perspective(glm::radians(60.0f), m_ScreenWidth / (float)m_ScreenHeight, 0.1f, 1000.0f);
 
-	glClearColor(0.2f, 0.5f, 1.0f, 1.0f);
+	glClearColor(0.1f, 0.2f, 0.2f, 1.0f);
 	//glClearColor(0.0, 0.0, 0.0, 0.0);
 	glEnable(GL_DEPTH_TEST);
 	__initBufferObjects();
@@ -57,23 +57,6 @@ void COITEffect::_renderEffectV()
 	
 	_ASSERTE(glGetError() == GL_NO_ERROR);
 }
-
-//***********************************************************
-//FUNCTION:
-// void COITEffect::__initTweakBar()
-// {
-// 	TwBar* pBar = Cooler::fetchTweakBar();
-// 	_ASSERTE(pBar);
-// 
-// 	TwAddVarCB(pBar, "Method", TW_TYPE_INT32, setMSAAMethod, getMSAAMethod, NULL, " min=0 max=2 ");
-// 	TwAddVarRW(pBar, "Mark", TW_TYPE_BOOL32, &m_bMarkComplexPixels, " label='Mark Complex Pixels'");
-// 
-// 	TwAddVarCB(pBar, "Separate", TW_TYPE_BOOL32, setSeparateComplexPassCB, getSeparateComplexPassCB, NULL, " label='Separate Complex Pass' ");
-// 	TwAddVarCB(pBar, "Adaptive", TW_TYPE_BOOL32, setAdaptiveShadingCB, getAdaptiveShadingCB, NULL, " label='Adaptively Shade Complex Pixels' ");
-// 	TwAddVarCB(pBar, "Per Sample", TW_TYPE_BOOL32, setPerSampleCB, getPerSampleCB, NULL, "label = 'Per Sample Pixel Shader'");
-// 	TwAddVarRW(pBar, "BRDF", TW_TYPE_BOOL32, &m_BRDF, " label='BRDF Lighting Model'");
-// }
-
 
 //***********************************************************
 //FUNCTION:
@@ -247,7 +230,7 @@ void COITEffect::__renderTransparentScenePass()
 
 	_updateShaderUniform("uMVPMatrix", MVPMatrix);
 	_updateShaderUniform("uNormalMatrix", m_NormalMatrix);
-	Cooler::graphicsRenderModel("SPONZA");
+	Cooler::graphicsRenderModel("CHESS");
 	//__drawTwoTriangles();
 	_disableShader("OIT_CREATE_LINKEDLIST_SHADER");
 }

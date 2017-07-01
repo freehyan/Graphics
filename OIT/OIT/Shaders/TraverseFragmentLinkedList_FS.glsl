@@ -65,7 +65,8 @@ vec4 blend(in vec4 vCurrentColor, in vec4 vNewColor)
 //计算最终片元颜色，遍历数组，每个像素与之前的像素混合
 vec4 calculateFinalColor(in int vFragCount)
 {
-	vec4 FinalColor = vec4(0.0);
+	//vec4 FinalColor = vec4(0.0);
+	vec4 FinalColor = vec4(0.1f, 0.2f, 0.2f, 1.0f);
 
 	int i = 0;
 	for (i=0; i<vFragCount; i++)

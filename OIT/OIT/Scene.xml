@@ -3,7 +3,7 @@
 <WINDOW type="subconfig" name="WINDOW">
   <WIN_WIDTH type="int">1280</WIN_WIDTH>
   <WIN_HEIGHT type="int">720</WIN_HEIGHT>
-  <WIN_TITLE type="string">OIT </WIN_TITLE>
+  <WIN_TITLE type="string"> Order-Independent Transparency </WIN_TITLE>
   <WIN_TWEAKBAR type="string"> ANTWEAKBAR </WIN_TWEAKBAR>
 </WINDOW>
 
@@ -14,7 +14,7 @@
   <PERSPECTIVE type="vec3"> 45.0 0.1 100.0</PERSPECTIVE>
 </CAMERA>
 
-<MODEL type="subconfig" name="SPONZA">
-  <!--<MODEL_FILE type="string">../Resources/Model/sponza/sponza.obj</MODEL_FILE>-->
-  <MODEL_FILE type="string">../Resources/Model/chess/chess.obj</MODEL_FILE>
+<MODEL type="subconfig" name="CHESS">
+  <!--<MODEL_FILE type="string">../../Resources/Model/sponza/sponza.obj</MODEL_FILE>-->
+  <MODEL_FILE type="string">../../Resources/Model/chess/chess.obj</MODEL_FILE>
 </MODEL>
