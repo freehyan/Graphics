@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="LLL_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  
+  <SHADER1 type="subconfig" name="LLL_GEOMETRY_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/0vertGeometryPass.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/0fragGeometryPass.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="LLL_DEPTH_BOUND_CULL_BACK_FACE">
+    <VERTEX_SHADER type="vecstring">shaders/1vertDepthBoundCullBacktFace.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/1fragDepthBoundCullBackFace.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+  
+  <SHADER3 type="subconfig" name="LLL_DEPTH_BOUND_CULL_FRONT_FACE">
+    <VERTEX_SHADER type="vecstring">shaders/2vertDepthBoundCullFronttFace.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/2fragDepthBoundCullFrontFace.glsl</FRAGMENT_SHADER>
+  </SHADER3>
+
+  <SHADER4 type="subconfig" name="LLL_RENDER_OPAQUE_SCENE">
+    <VERTEX_SHADER type="vecstring">shaders/3vertRenderOpaqueByLLL.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/3fragRenderOpaqueByLLL.glsl</FRAGMENT_SHADER>
+  </SHADER4>
+
+  <SHADER5 type="subconfig" name="LLL_DIRECTIONAL_LIGHT">
+    <VERTEX_SHADER type="vecstring">shaders/4vertDirectionalLightingPass.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/4fragDirectionalLightingPass.glsl</FRAGMENT_SHADER>
+  </SHADER5>
+
+  <SHADER6 type="subconfig" name="LLL_RENDER_TRANSPARENT">
+    <VERTEX_SHADER type="vecstring">shaders/5vertRenderTransparentByLLL.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/5fragRenderTransparentByLLL.glsl</FRAGMENT_SHADER>
+  </SHADER6>
+
+  <SHADER7 type="subconfig" name="LLL_GENERAOTE_LIGHT_SOURCE">
+    <VERTEX_SHADER type="vecstring">shaders/6vertGenerateLightSource.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/6fragGenerateLightSource.glsl</FRAGMENT_SHADER>
+  </SHADER7>
+</EFFECT>
