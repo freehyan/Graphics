@@ -14,14 +14,14 @@
   <PERSPECTIVE type="vec3"> 45.0 0.1 100.0</PERSPECTIVE>
 </CAMERA>
 
-<MODEL type="subconfig" name="SPONZA">
+<MODEL type="subconfig">SPONZA
   <MODEL_FILE type="string">../../Resources/Model/sponza_2/sponza.obj</MODEL_FILE>
 </MODEL>
 
-<MODEL type="subconfig" name="BOTTLE">
+<MODEL type="subconfig">BOTTLE
   <MODEL_FILE type="string">../../Resources/Model/bottle/bottle.obj</MODEL_FILE>
 </MODEL>
 
-<MODEL type="subconfig" name="SPHERE">
+<MODEL type="subconfig">SPHERE
   <MODEL_FILE type="string">../../Resources/Model/sphere/sphere.obj</MODEL_FILE>
 </MODEL>

@@ -46,7 +46,7 @@ private:
 	
 	void __resetLightStartOffsetBuffer();
 	float __calcPointLightBSphere(const SPointLight& vLight);
-//	void __updateLightSourceSetPosition();
+	void __updateLightSourceSetPosition();
 	void __setDirectionalLight();
 
 	SDirectionalLight m_DirectinalLight;
@@ -67,6 +67,8 @@ private:
 	GLuint m_LightSSBO;
 	GLuint m_SSBOBlockIndex;
 	GLuint m_ScreenWidth, m_ScreenHeight;
+	GLboolean m_bMoveLightSource;
+	GLint m_Count;
 
 	glm::mat4 m_ProjectionMatrix, m_ModelViewMatrix, m_NormalMatrix;
 	Cooler::CInputTransformer* m_pInputTransformer;

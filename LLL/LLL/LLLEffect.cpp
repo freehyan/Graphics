@@ -8,24 +8,22 @@
 #include <Cooler/InputTransformer.h>
 #include "DeferredFBO.h"
 
-// #define SCREEN_WIDTH 1024
-// #define SCREEN_HEIGHT 768
 // #define LLL_WIDTH 512
 // #define LLL_HEIGHT 384
 // #define SCREENLLLRATIO SCREEN_WIDTH/LLL_WIDTH
 #define POINT_LIGHT_RADIUS 10
 
 #define POINT_LIHGT_NUM 100
-#define MAX_BOUNDARY 10
-#define MIN_BOUNDARY -10
-#define MATH_PI 3.141592653589793
-#define MODEL_SCALE 0.1f
+// #define MAX_BOUNDARY 10
+// #define MIN_BOUNDARY -10
+ #define MATH_PI 3.141592653589793
+// #define MODEL_SCALE 0.1f
 
-glm::vec3 g_EyeWorldPos = glm::vec3(0.0, 0.0, 15.0);
+glm::vec3 g_EyeWorldPos = glm::vec3(0.0, 2.0, 5.0);
 
 using namespace Cooler;
 Cooler::CProductFactory<CLLLEffect> theCreater("LLL_EFFECT");
-CLLLEffect::CLLLEffect() : m_pInputTransformer(nullptr), m_pDeferredFBO(nullptr)
+CLLLEffect::CLLLEffect() : m_pInputTransformer(nullptr), m_pDeferredFBO(nullptr), m_bMoveLightSource(false), m_Count(0)
 {
 	m_ScreenWidth = Cooler::getDisplayWindowsSize().first;
 	m_ScreenHeight = Cooler::getDisplayWindowsSize().second;
@@ -39,20 +37,23 @@ CLLLEffect::~CLLLEffect()
 //FUNCTION:
 void CLLLEffect::_initEffectV()
 {
+	_ASSERTE(glGetError() == GL_NO_ERROR);
 	__initDirectionLight();
 	__initTransparentMeshPosition();
 	__initLLLUAVBuffers();
+	
+	__initLightSourcesData();
 
 	__createSreenQuad();
 	__createLightSSBO();
 
-	__initTweakBar();
+//	__initTweakBar();
 
 	m_pInputTransformer = Cooler::fetchInputTransformer();
-	m_pInputTransformer->setTranslationVec(glm::vec3(0.0, 0.0, -15.0));
-//	m_pInputTransformer->setRotationVec(glm::vec3(0.0, 90.0, 0.0));
+	m_pInputTransformer->setTranslationVec(glm::vec3(0.0, -2.0, -5.0));
+	m_pInputTransformer->setRotationVec(glm::vec3(0.0, 90.0, 0.0));
 	m_pInputTransformer->setScale(0.1f);
-	m_pInputTransformer->setMotionMode(Cooler::SCameraMotionType::FIRST_PERSON);
+//	m_pInputTransformer->setMotionMode(Cooler::SCameraMotionType::FIRST_PERSON);
 
 	//glClearColor(0.2f, 0.5f, 1.0f, 1.0f);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -81,8 +82,7 @@ void CLLLEffect::_renderEffectV()
 
 	__renderTransparentScenePass();
 
-// 	if (m_bMoveLightSource)
-// 		__updateLightSourceSetPosition();
+	__updateLightSourceSetPosition();
 
 	m_pDeferredFBO->closeFBO();
 
@@ -133,7 +133,7 @@ void CLLLEffect::__initLLLUAVBuffers()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32UI, m_ScreenWidth, m_ScreenHeight, 0, GL_RED_INTEGER, GL_UNSIGNED_INT, NULL);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
+	
 	//每帧都需要重初始化StartOffsetBuffer,使用PBO实现
 	glGenBuffers(1, &m_LightStartOffsetBufferPBO);
 	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, m_LightStartOffsetBufferPBO);//GL_PIXEL_UNPACK_BUFFER通常作为glTexImage2D等纹理命令数据来源
@@ -143,7 +143,7 @@ void CLLLEffect::__initLLLUAVBuffers()
 	memset(pData, 0x00, ScreenTotalPixels * sizeof(GLuint));
 	glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
 	glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-
+	
 	//创建原子计数器缓存
 	glGenBuffers(1, &m_AtomicCounterBuffer);
 	glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_AtomicCounterBuffer);
@@ -178,10 +178,10 @@ void CLLLEffect::__initLightSourcesData()
 
 		pPointLight->m_LightColor = glm::vec3(Red, Green, Blue);
 		pPointLight->m_AmbientIntensity = 0.2;
-		pPointLight->m_DiffuseIntensity = 1.0;
+		pPointLight->m_DiffuseIntensity = 0.9;
 		pPointLight->m_Position = glm::vec3(X, Y, Z);
 		pPointLight->m_Attenuation.m_Constant = 1.0f;
-		pPointLight->m_Attenuation.m_Linear = 0.0f;
+		pPointLight->m_Attenuation.m_Linear = 0.1f;
 		pPointLight->m_Attenuation.m_Quadratic = 0.0f;
 		m_PointLightSourceSet.push_back(pPointLight);
 
@@ -258,7 +258,7 @@ void CLLLEffect::__createLightSSBO()
 	glBufferData(GL_SHADER_STORAGE_BUFFER, LightCount * sizeof(SGPUPointLight), pPointLightSet, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
-	delete[]pPointLightSet;
+	delete[] pPointLightSet;
 }
 
 //***********************************************************
@@ -294,6 +294,7 @@ void CLLLEffect::__DSGemetroyPass()
 	_updateShaderUniform("_uMVPMatrix", MVPMatrix);
 	_updateShaderUniform("_uModelMatrix", ModelMatrix);
 	_updateShaderUniform("_uNormalMatrix", NormalMatrix);
+	_updateShaderUniform("_uColorTex", 0);
 
 	Cooler::graphicsRenderModel("SPONZA");
 	_disableShader("LLL_GEOMETRY_SHADER");
@@ -331,10 +332,10 @@ void CLLLEffect::__createLLLCullingBackFacePass()
 		
 		_updateShaderUniform("uMVPMatrix", MVPMatrix);
 
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, m_pDeferredFBO->getFBODepth());
 		
-		_updateShaderUniform("uDepthTex", 0);
+		_updateShaderUniform("uDepthTex", 1);
 		_updateShaderUniform("uLightIndex", i);
 		_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
 		Cooler::graphicsRenderModel("SPHERE");
@@ -402,7 +403,6 @@ void CLLLEffect::__renderOpaqueScenePass()
 	glBindTexture(GL_TEXTURE_2D, m_pDeferredFBO->m_NormalTex);
 	_updateShaderUniform("uNormalTex", 2);
 	_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
-
 
 	__renderScreenSizeQuad();
 	glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
@@ -477,8 +477,6 @@ void CLLLEffect::__renderTransparentScenePass()
 	for (unsigned int i = 0; i < m_BottlePosition.size(); i++)
 	{
 		Model = glm::mat4(1.0);
-// 		Model = glm::rotate(Model, glm::radians((GLfloat)m_MotionX), glm::vec3(1.0, 0.0, 0.0));
-// 		Model = glm::rotate(Model, glm::radians((GLfloat)m_MotionY), glm::vec3(0.0, 1.0, 0.0));
 		Model = glm::translate(Model, m_BottlePosition[i]);
 		MVPMatrix = m_ProjectionMatrix * ViewMatrix * Model;
 		NormalMatrix = glm::transpose(glm::inverse(ViewMatrix * Model));
@@ -533,13 +531,34 @@ float CLLLEffect::__calcPointLightBSphere(const SPointLight& vLight)
 
 //***********************************************************
 //FUNCTION::
+void CLLLEffect::__updateLightSourceSetPosition()
+{
+	for (unsigned int i = 0; i < POINT_LIHGT_NUM; i++)
+	{
+		glm::vec3 Pos = glm::vec3(0.0, m_PointLightSourceSet[i]->m_Position.y, 0.0);
+		float Radius = sqrtf(glm::dot(Pos - m_PointLightSourceSet[i]->m_Position, Pos - m_PointLightSourceSet[i]->m_Position));
+
+		float Degree = m_InitDegree[i];
+		m_PointLightSourceSet[i]->m_Position = glm::vec3(cos(MATH_PI*(Degree + m_Count) / 180)*Radius, Pos.y, sin(MATH_PI*(Degree + m_Count) / 180)*Radius);
+
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_LightSSBO);
+		SGPUPointLight* pGPUSSBOData = (SGPUPointLight*)glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_WRITE_ONLY);
+		_ASSERT(pGPUSSBOData);
+		pGPUSSBOData[i].LightPosition = glm::vec4(m_PointLightSourceSet[i]->m_Position, 0.0);
+		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+	}
+
+	m_Count++;
+}
+
+//***********************************************************
+//FUNCTION::
 void CLLLEffect::__setDirectionalLight()
 {
 	_updateShaderUniform("uDirectionalLight.BaseLight.Color", glm::vec4(m_DirectinalLight.m_LightColor, 0.0));
 	_updateShaderUniform("uDirectionalLight.BaseLight.AmbientIntensity", m_DirectinalLight.m_AmbientIntensity);
 	_updateShaderUniform("uDirectionalLight.BaseLight.DiffuseIntensity", m_DirectinalLight.m_DiffuseIntensity);
 	_updateShaderUniform("uDirectionalLight.Direction", glm::vec4(m_DirectinalLight.m_Direction, 0.0));
-
 }
 
 //***********************************************************

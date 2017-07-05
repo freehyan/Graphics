@@ -28,15 +28,6 @@ layout (std430, binding=1) buffer ssbo_block_GPULightEnv
 	SPointLight uPointLight[];
 };
 
-//先假定LightStartOffsetImage分辨率和屏幕分辨率一致
-//struct LightFragmentLink
-//{
-//  uint m_LightIndex;
-//	float m_MinDepth;
-//	float m_MaxDepth;
-//	uint uNext;
-//};
-
 layout (binding = 0, r32ui) uniform uimage2D uLightStartOffsetImage;
 layout (binding = 1, rgba32ui) uniform uimageBuffer uLightFragmentLinkedLBuffer;
 
@@ -146,5 +137,4 @@ void main()
 	float fSceneDepth = texture2D(uDepthTex, TexCoords).x;
 
 	Color = calcDynamicLights(WorldPos, Normal, fSceneDepth);
-
 }
