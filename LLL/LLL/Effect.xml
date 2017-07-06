@@ -32,9 +32,4 @@
     <VERTEX_SHADER type="vecstring">shaders/5vertRenderTransparentByLLL.glsl</VERTEX_SHADER>
     <FRAGMENT_SHADER type="vecstring">shaders/5fragRenderTransparentByLLL.glsl</FRAGMENT_SHADER>
   </SHADER6>
-
-  <SHADER7 type="subconfig" name="LLL_GENERAOTE_LIGHT_SOURCE">
-    <VERTEX_SHADER type="vecstring">shaders/6vertGenerateLightSource.glsl</VERTEX_SHADER>
-    <FRAGMENT_SHADER type="vecstring">shaders/6fragGenerateLightSource.glsl</FRAGMENT_SHADER>
-  </SHADER7>
 </EFFECT>
