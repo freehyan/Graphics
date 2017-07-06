@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="FLUID_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  
+  <SHADER1 type="subconfig" name="FLUID_THICK_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/01vertThickness.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/01fragThickness.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="FLUID_DEPTH_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/02vertDepth.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/02fragDepth.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+  
+  <SHADER3 type="subconfig" name="FLUID_CURVATURE_FLOW_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/03vertCurvatureFlowFilter.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/03fragCurvatureFlowFilter.glsl</FRAGMENT_SHADER>
+  </SHADER3>
+
+  <SHADER4 type="subconfig" name="FLUID_BILATER_FILTER">
+    <VERTEX_SHADER type="vecstring">shaders/04vertBilateralFilter.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/04fragBilateralFilter.glsl</FRAGMENT_SHADER>
+  </SHADER4>
+
+  <SHADER5 type="subconfig" name="FLUID_SCENE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/05vertScene.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/05fragScene.glsl</FRAGMENT_SHADER>
+  </SHADER5>
+
+  <SHADER6 type="subconfig" name="FLUID_COMPOSTE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/06vertComposite.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/06fragComposite.glsl</FRAGMENT_SHADER>
+  </SHADER6>
+
+  <SHADER6 type="subconfig" name="FLUID_SHOW_TEXTURE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/vertDrawScreenQuad.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/fragDirectCopy.glsl</FRAGMENT_SHADER>
+  </SHADER6>
+</EFFECT>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FRAMEBUFFER type="subconfig"> THICKNESS_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+ 
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_thickness</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+<FRAMEBUFFER type="subconfig">
+  DEPTH_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_depth</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+
+<FRAMEBUFFER type="subconfig">
+  CURVATURE_FLOW_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_smooth_depth</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+<FRAMEBUFFER type="subconfig">
+  BILATERAL_NORMAL_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_bilateral_normal</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+
+<FRAMEBUFFER type="subconfig">
+  SHADED_NORMAL_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_shaded_normal</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+
+<FRAMEBUFFER type="subconfig">
+  SCENE_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_scene</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+
+<FRAMEBUFFER type="subconfig">
+  COMPOSITE_FBO
+  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_composite</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>

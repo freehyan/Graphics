@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<WINDOW type="subconfig" name="WINDOW">
+  <WIN_WIDTH type="int">1024</WIN_WIDTH>
+  <WIN_HEIGHT type="int">768</WIN_HEIGHT>
+  <WIN_TITLE type="string">Light Linked List</WIN_TITLE>
+  <!--<WIN_TWEAKBAR type="string"> ANTWEAKBAR </WIN_TWEAKBAR>-->
+</WINDOW>
