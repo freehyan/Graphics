@@ -53,6 +53,36 @@ The major problem of shadow map is aliasing. Filtering the shadow map alleviates
 
 [Reference]: [Exponential Shadowm Maps](http://jankautz.com/publications/esm_gi08.pdf), Thomas Anne, 2008.
 
+---
+
+##### The following paper source code I do not want to open source temporarily, because they are also helpful to the graduation project in next year. I am sorry this behavior, thanks.
+
+## Deferred Attribute Interpolation Shading
+
+DAIS proposed a method to dynamically reduce the memory consumption of deferred shading, through the visibility buffer and triangle buffer instead of the original G-Buffer, and then in the shading phase through the triangular partial derivative for attribute interpolation for lighting calculations.
+
+<img src="http://7xwp8l.com1.z0.glb.clouddn.com/DAIS.png" width="500" height="300" alt="DAIS" />
+
+[Reference]: [Deferred Attribute Interpolation Shading](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwjU1LnZjvrUAhUEurwKHXM1BcIQFggoMAA&url=http%3A%2F%2Fcg.ivd.kit.edu%2Fpublications%2F2015%2Fdais%2FDAIS.pdf&usg=AFQjCNFVahpeS6ZBXtqPPabGsPTHxapU6g), GPU Pro 7, 2016.
+
+
+## Volumetric Fog and Lighting
+
+Volumetric fog is an extension of existing ray-marching algorithms. It uses the advantages of three-dimensional texture, calculate the in-scattering of light and volume fog effect.
+
+<img src="http://7xwp8l.com1.z0.glb.clouddn.com/Volumetric%20Fog.png" width="500" height="300" alt="FOG" />
+
+[Reference]: [Volumetric Fog and Lighting](https://books.google.com/books?hl=en&lr=&id=30ZOCgAAQBAJ&oi=fnd&pg=PA217&dq=Volumetric+Fog+and+Lighting&ots=2YlygWJDIN&sig=36V0ZSUOPcUglBFCKKxa_OOD5GQ#v=onepage&q=Volumetric%20Fog%20and%20Lighting&f=false), Bartlomiej Wro´ nski, 2015.
+
+## Stochastic Screen Space Reflection
+
+The traditional screen space reflection has no contact hardening, Specular elongation, pixel-pixel roughness and other real effects' characteristics. SSSR introduces the importance sampling and halton sequence to ensure the reflection of the realistic effect.
+
+<img src="http://7xwp8l.com1.z0.glb.clouddn.com/SSR.png" width="500" height="300" alt="SSR" />
+
+[Reference]: [Stochastic Screen Space Reflection](http://advances.realtimerendering.com/s2015/Stochastic%20Screen-Space%20Reflections.pptx), Tomasz Stachowiak, 2015.
+
+
 ## License
 
 **Graphics** is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
