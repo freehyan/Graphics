@@ -120,8 +120,7 @@ void main(void)
 //Color Attenuation from Thickness(Beer's Law)
 		float fLightAttenuation = dot(uDirectionalLight.Direction, f3Normal) * 0.05;
 		f4DiffuseLight = vec4(mix(f4DiffuseLight.xyz, vec3(1.0f), (fLightAttenuation*0.5 + 0.5) * 0.4f), 1.0f);
-		f4Color = f4FluidColor*f4DiffuseLight + vec4(mix(f3RefactionColor, f3ReflectionColor, fFresnel), 1.0f);
-		_FluidColor = vec4(f4Color.xyz, 1.0f);
+		f4Color = f4FluidColor * f4DiffuseLight + vec4(mix(f3RefactionColor, f3ReflectionColor, fFresnel), 1.0f);
 	}
 
 	_FluidColor = vec4(f4Color.xyz, 1.0f);

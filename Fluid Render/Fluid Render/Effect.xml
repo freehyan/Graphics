@@ -18,23 +18,29 @@
     <FRAGMENT_SHADER type="vecstring">shaders/03fragCurvatureFlowFilter.glsl</FRAGMENT_SHADER>
   </SHADER3>
 
-  <SHADER4 type="subconfig" name="FLUID_BILATER_FILTER">
+  <SHADER4 type="subconfig" name="FLUID_BILATERAL_FILTER_SHADER">
     <VERTEX_SHADER type="vecstring">shaders/04vertBilateralFilter.glsl</VERTEX_SHADER>
     <FRAGMENT_SHADER type="vecstring">shaders/04fragBilateralFilter.glsl</FRAGMENT_SHADER>
   </SHADER4>
 
-  <SHADER5 type="subconfig" name="FLUID_SCENE_SHADER">
-    <VERTEX_SHADER type="vecstring">shaders/05vertScene.glsl</VERTEX_SHADER>
-    <FRAGMENT_SHADER type="vecstring">shaders/05fragScene.glsl</FRAGMENT_SHADER>
+  <SHADER5 type="subconfig" name="FLUID_SHADED_NORMAL_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/05vertShadedNormal.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/05fragShadedNormal.glsl</FRAGMENT_SHADER>
   </SHADER5>
 
-  <SHADER6 type="subconfig" name="FLUID_COMPOSTE_SHADER">
-    <VERTEX_SHADER type="vecstring">shaders/06vertComposite.glsl</VERTEX_SHADER>
-    <FRAGMENT_SHADER type="vecstring">shaders/06fragComposite.glsl</FRAGMENT_SHADER>
+  <SHADER6 type="subconfig" name="FLUID_SCENE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/06vertScene.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/06fragScene.glsl</FRAGMENT_SHADER>
   </SHADER6>
 
-  <SHADER6 type="subconfig" name="FLUID_SHOW_TEXTURE_SHADER">
+  <SHADER7 type="subconfig" name="FLUID_COMPOSTE_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/07vertComposite.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/07fragComposite.glsl</FRAGMENT_SHADER>
+  </SHADER7>
+
+  <SHADER8 type="subconfig" name="FLUID_SHOW_TEXTURE_SHADER">
     <VERTEX_SHADER type="vecstring">shaders/vertDrawScreenQuad.glsl</VERTEX_SHADER>
     <FRAGMENT_SHADER type="vecstring">shaders/fragDirectCopy.glsl</FRAGMENT_SHADER>
-  </SHADER6>
+  </SHADER8>
+
 </EFFECT>

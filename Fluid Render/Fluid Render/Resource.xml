@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FRAMEBUFFER type="subconfig"> THICKNESS_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
  
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -11,7 +11,7 @@
 
 <FRAMEBUFFER type="subconfig">
   DEPTH_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -22,7 +22,7 @@
 
 <FRAMEBUFFER type="subconfig">
   CURVATURE_FLOW_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -32,7 +32,7 @@
 
 <FRAMEBUFFER type="subconfig">
   BILATERAL_NORMAL_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -43,7 +43,7 @@
 
 <FRAMEBUFFER type="subconfig">
   SHADED_NORMAL_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -54,7 +54,7 @@
 
 <FRAMEBUFFER type="subconfig">
   SCENE_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
@@ -65,7 +65,7 @@
 
 <FRAMEBUFFER type="subconfig">
   COMPOSITE_FBO
-  <FBO_SIZE type="vec2"> 1024 768 </FBO_SIZE>
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
   <FBO_STENCIL type="bool">0</FBO_STENCIL>
 
   <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">

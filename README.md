@@ -22,7 +22,7 @@ Deferred shading does not support anti-aliasing, because the scene geometry info
 
 ## Order-Independent Transparency
 
-OIT traditional approach is to do a depth sort of transparent objects, and then render them from front to back's order. This algorithm uses the UAV new feature to build the linked list, efficiently and correctly render transparent object effects.
+OIT traditional approach is to do a depth sort of transparent objects, and then render them from back to front's order. This algorithm uses the UAV new feature to build the linked list, efficiently and correctly render transparent object effects.
 
 <img src="http://7xwp8l.com1.z0.glb.clouddn.com/OIT.png" width="500" height="300" alt="OIT" />
 
@@ -36,6 +36,14 @@ Deferred lighting is a popular technique, but it doesn't deal with transparency 
 <img src="http://7xwp8l.com1.z0.glb.clouddn.com/LLL.png" width="500" height="300" alt="LLL" />
 
 [Reference]: [Real-Time Lighting via Light Linked List](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwj_hOeTrPLUAhXHj5QKHRxdBxoQFggoMAA&url=http%3A%2F%2Fadvances.realtimerendering.com%2Fs2014%2Finsomniac%2FLight%2520Linked%2520List.pptx&usg=AFQjCNHYENomC1xMKPF80DDWiCaQQuZVUA), Abdul Bezrati (Insomniac Games), 2014
+
+## Screen Space Fluid Render
+
+Screen Space Fluid Render is not based on polygonization. SSFR only handles surface particles of the visible range, so greatly improving the real-time performance. And it smoothes the surface to prevent the fluid from looking "blobby" or jelly-like.
+
+<img src="http://7xwp8l.com1.z0.glb.clouddn.com/Fluid.png" width="500" height="300" alt="FLUID" />
+
+[Reference]: [Screen Space Fluid Render](http://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pdf), NVIDIA, 2010.
 
 ## License
 

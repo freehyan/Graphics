@@ -114,16 +114,22 @@
     <None Include="Shaders\04vertBilateralFilter.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\05fragScene.glsl">
+    <None Include="Shaders\05fragShadedNormal.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\05vertScene.glsl">
+    <None Include="Shaders\05vertShadedNormal.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\06fragComposite.glsl">
+    <None Include="Shaders\06fragScene.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\06vertComposite.glsl">
+    <None Include="Shaders\06vertScene.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\07fragComposite.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\07vertComposite.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\fragDirectCopy.glsl">

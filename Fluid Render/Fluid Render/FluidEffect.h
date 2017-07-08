@@ -68,7 +68,7 @@ private:
 	CDepthFBO* m_pDepthFBO;
 	CCurvatureFlowFBO* m_pCurtureFlowFBO; //curvature
 	CBilateralNormalFBO* m_pBilateralNormalFBO;
-	CShadedNormalFBO* m_ShadedNormalFBO;
+	CShadedNormalFBO* m_pShadedNormalFBO;
 	CSceneFBO* m_pSceneFBO;
 	CCompositeFBO* m_pCompositeFBO;
 };

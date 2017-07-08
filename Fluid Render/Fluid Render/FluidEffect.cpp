@@ -17,7 +17,7 @@
 #define FOV 90.0
 #define NEAR_P 0.2
 #define FAR_P 1000.0
-#define CURTURE_FLOW_ITERATION_NUM 60
+#define CURTURE_FLOW_ITERATION_NUM 10
 #define PARTICLE_COUNT 20000
 
 glm::vec3 g_EyeWorldPos = glm::vec3(0.0, 0.0, 20.0);
@@ -25,7 +25,7 @@ glm::vec3 g_EyeWorldPos = glm::vec3(0.0, 0.0, 20.0);
 using namespace Cooler;
 Cooler::CProductFactory<CFluidEffect> theCreater("FLUID_EFFECT");
 CFluidEffect::CFluidEffect() : m_pInputTransformer(nullptr), m_pThickFBO(nullptr), m_pDepthFBO(nullptr), m_pCurtureFlowFBO(nullptr), m_pBilateralNormalFBO(nullptr),
-m_pSceneFBO(nullptr), m_ShadedNormalFBO(nullptr), m_pCompositeFBO(nullptr)
+m_pSceneFBO(nullptr), m_pShadedNormalFBO(nullptr), m_pCompositeFBO(nullptr)
 {
 	m_ScreenWidth = Cooler::getDisplayWindowsSize().first;
 	m_ScreenHeight = Cooler::getDisplayWindowsSize().second;
@@ -57,7 +57,7 @@ void CFluidEffect::_initEffectV()
 	__createSreenQuad();
 
 	m_pInputTransformer = Cooler::fetchInputTransformer();
-	m_pInputTransformer->setTranslationVec(glm::vec3(0.0, 0.0, -20.0));
+	m_pInputTransformer->setTranslationVec(glm::vec3(0.0f, 0.0f, -20.0f));
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glEnable(GL_DEPTH_TEST);
@@ -116,18 +116,22 @@ void CFluidEffect::__initFBOBuffers()
 {
 	m_pThickFBO = dynamic_cast<CThicknessFBO*>(Cooler::fetchFBO("THICKNESS_FBO"));
 	_ASSERTE(m_pThickFBO);
+
 	m_pDepthFBO = dynamic_cast<CDepthFBO*>(Cooler::fetchFBO("DEPTH_FBO"));
 	_ASSERTE(m_pDepthFBO);
+
 	m_pCurtureFlowFBO = dynamic_cast<CCurvatureFlowFBO*>(Cooler::fetchFBO("CURVATURE_FLOW_FBO"));
 	_ASSERTE(m_pCurtureFlowFBO);
 
 	m_pBilateralNormalFBO = dynamic_cast<CBilateralNormalFBO*>(Cooler::fetchFBO("BILATERAL_NORMAL_FBO"));
 	_ASSERTE(m_pBilateralNormalFBO);
 
-	m_ShadedNormalFBO = dynamic_cast<CShadedNormalFBO*>(Cooler::fetchFBO("SHADED_NORMAL_FBO"));
-	_ASSERTE(m_ShadedNormalFBO);
+	m_pShadedNormalFBO = dynamic_cast<CShadedNormalFBO*>(Cooler::fetchFBO("SHADED_NORMAL_FBO"));
+	_ASSERTE(m_pShadedNormalFBO);
+
 	m_pSceneFBO = dynamic_cast<CSceneFBO*>(Cooler::fetchFBO("SCENE_FBO"));
 	_ASSERTE(m_pSceneFBO);
+
 	m_pCompositeFBO = dynamic_cast<CCompositeFBO*>(Cooler::fetchFBO("COMPOSITE_FBO"));
 	_ASSERTE(m_pCompositeFBO);
 }
@@ -175,7 +179,7 @@ void CFluidEffect::__calcThicknessPass()
 	_updateShaderUniform("uViewMatrix", m_ViewMatrix);
 	_updateShaderUniform("uProjectionMatrix", m_ProjectionMatrix);
 	_updateShaderUniform("uPointRadius", m_ThicknessScale*m_PointRadius);
-	_updateShaderUniform("uPointScale", (float)m_ScreenHeight*(1.0f / (tanf(FOV * 0.5f))));
+//	_updateShaderUniform("uPointScale", (float)m_ScreenHeight*(1.0f / (tanf(FOV * 0.5f))));
 
 	m_Fluid.renderPointSprite2DepthAndColor();
 
@@ -199,7 +203,7 @@ void CFluidEffect::__calcDepthPass()
 	_updateShaderUniform("uViewMatrix", m_ViewMatrix);
 	_updateShaderUniform("uProjectionMatrix", m_ProjectionMatrix);
 	_updateShaderUniform("uPointRadius", m_ThicknessScale*m_PointRadius);
-	_updateShaderUniform("uPointScale", (float)m_ScreenHeight*(1.0f / (tanf(FOV * 0.5f))));
+//	_updateShaderUniform("uPointScale", (float)m_ScreenHeight*(1.0f / (tanf(FOV * 0.5f))));
 
 	m_Fluid.renderPointSprite2DepthAndColor();
 
@@ -220,7 +224,7 @@ void CFluidEffect::__curtureFlowFilterPass()
 	_enableShader("FLUID_CURVATURE_FLOW_SHADER");
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE0, m_pDepthFBO->m_DepthTex);
+	glBindTexture(GL_TEXTURE_2D, m_pDepthFBO->m_DepthTex);
 	_updateShaderUniform("uFluidDepthTex", 0);
 	_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
 	_updateShaderUniform("uFOV", (float)FOV);
@@ -246,17 +250,17 @@ void CFluidEffect::__curtureFlowFilterPass()
 		_ASSERTE(glGetError() == GL_NO_ERROR);
 		glViewport(0, 0, m_ScreenWidth, m_ScreenHeight);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_enableShader("FLUID_BILATER_FILTER");
+		_enableShader("FLUID_CURVATURE_FLOW_SHADER");
 
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE0, AuxiliaryTexture);
+		glBindTexture(GL_TEXTURE_2D, AuxiliaryTexture);
 		_updateShaderUniform("uFluidDepthTex", 0);
 		_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
 		_updateShaderUniform("uFOV", (float)FOV);
 		__renderScreenSizeQuad();
 
 		glBindTexture(GL_TEXTURE_2D, 0);
-		_disableShader("FLUID_BILATER_FILTER");
+		_disableShader("FLUID_CURVATURE_FLOW_SHADER");
 		m_pCurtureFlowFBO->closeFBO();
 
 		glDeleteTextures(1, &AuxiliaryTexture);
@@ -274,17 +278,17 @@ void CFluidEffect::__bilateralFilterPass()
 	glViewport(0, 0, m_ScreenWidth, m_ScreenHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_enableShader("BILATERAL_NORMAL_FBO");
+	_enableShader("FLUID_BILATERAL_FILTER_SHADER");
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE0, m_pCurtureFlowFBO->m_SmoothDepthTex);
+	glBindTexture(GL_TEXTURE_2D, m_pCurtureFlowFBO->m_SmoothDepthTex);
 	_updateShaderUniform("uFluidDepthTex", 0);
 	_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
 	_updateShaderUniform("uFOV", (float)FOV);
 
 	__renderScreenSizeQuad();
 	glBindTexture(GL_TEXTURE_2D, 0);
-	_disableShader("BILATERAL_NORMAL_FBO");
+	_disableShader("FLUID_BILATERAL_FILTER_SHADER");
 	m_pBilateralNormalFBO->closeFBO();
 
 	_ASSERTE(glGetError() == GL_NO_ERROR);
@@ -295,25 +299,25 @@ void CFluidEffect::__bilateralFilterPass()
 void CFluidEffect::__shadedNormalPass()
 {
 	_ASSERTE(glGetError() == GL_NO_ERROR);
-	m_ShadedNormalFBO->openFBO();
+	m_pShadedNormalFBO->openFBO();
 	glViewport(0, 0, m_ScreenWidth, m_ScreenHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_enableShader("FLUID_BILATER_FILTER");
+	_enableShader("FLUID_SHADED_NORMAL_SHADER");
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE0, m_pDepthFBO->m_DepthTex);
+	glBindTexture(GL_TEXTURE_2D, m_pDepthFBO->m_DepthTex);
 	_updateShaderUniform("uFluidDepthTex", 0);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE0, m_pBilateralNormalFBO->m_BilateralNormalTex);
-	_updateShaderUniform("uBilateralNormalTex", 0);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_pBilateralNormalFBO->m_BilateralNormalTex);
+	_updateShaderUniform("uBilateralNormalTex", 1);
 	_updateShaderUniform("uScreenSize", glm::vec2(m_ScreenWidth, m_ScreenHeight));
 	_updateShaderUniform("uSampleOffset", (int)4);
 
 	__renderScreenSizeQuad();
 	glBindTexture(GL_TEXTURE_2D, 0);
-	_disableShader("BILATERAL_NORMAL_FBO");
-	m_ShadedNormalFBO->closeFBO();
+	_disableShader("FLUID_SHADED_NORMAL_SHADER");
+	m_pShadedNormalFBO->closeFBO();
 	_ASSERTE(glGetError() == GL_NO_ERROR);
 }
 
@@ -328,14 +332,15 @@ void CFluidEffect::__scenePass()
 	glDepthFunc(GL_LEQUAL);
 	glDepthMask(GL_FALSE);
 
-	_enableShader("SCENE_FBO");
+	_enableShader("FLUID_SCENE_SHADER");
 	_updateShaderUniform("uViewMatrix", glm::mat4(glm::mat3(m_ViewMatrix)));
 	_updateShaderUniform("uProjectionMatrix", m_ProjectionMatrix);
+
 	glActiveTexture(GL_TEXTURE0);
 	_updateShaderUniform("uSkyBoxTex", 0);
-
 	m_CubeMap.renderSkybox();
-	_disableShader("SCENE_FBO");
+
+	_disableShader("FLUID_SCENE_SHADER");
 
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LESS);
@@ -351,22 +356,22 @@ void CFluidEffect::__compositePass()
 	glViewport(0, 0, m_ScreenWidth, m_ScreenHeight);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	_enableShader("COMPOSITE_FBO");
+	_enableShader("FLUID_COMPOSTE_SHADER");
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE0, m_pThickFBO->m_ThicknessTex);
+	glBindTexture(GL_TEXTURE_2D, m_pThickFBO->m_ThicknessTex);
 	_updateShaderUniform("uThicknessTex", 0);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE1, m_pCurtureFlowFBO->m_SmoothDepthTex);
+	glBindTexture(GL_TEXTURE_2D, m_pCurtureFlowFBO->m_SmoothDepthTex);
 	_updateShaderUniform("uDepthTex", 1);
 	
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE2, m_pBilateralNormalFBO->m_BilateralNormalTex);
+	glBindTexture(GL_TEXTURE_2D, m_pBilateralNormalFBO->m_BilateralNormalTex);
 	_updateShaderUniform("uNormalTex", 2);
 
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE3, m_pSceneFBO->m_SceneTex);
+	glBindTexture(GL_TEXTURE_2D, m_pSceneFBO->m_SceneTex);
 	_updateShaderUniform("uSceneTex", 3);
 
 	m_CubeMap.bindTexture(GL_TEXTURE4);
@@ -387,7 +392,7 @@ void CFluidEffect::__compositePass()
 
 	__renderScreenSizeQuad();
 	glBindTexture(GL_TEXTURE_2D, 0);
-	_disableShader("COMPOSITE_FBO");
+	_disableShader("FLUID_COMPOSTE_SHADER");
 
 	m_pCompositeFBO->closeFBO();
 	_ASSERTE(glGetError() == GL_NO_ERROR);

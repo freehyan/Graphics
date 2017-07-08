@@ -16,7 +16,7 @@ void main(void)
 	vec4 Position = uWVPMatrix *vec4(_VertexPosition.xyz, 1.0);
 	gl_Position = Position;
 
-	//gl_PointSize = 10;
-	gl_PointSize = 5 * uPointScale * (uPointRadius / Position.w);
+	//gl_PointSize = (1.0 - Position.z / Position.w) * 640;
+	gl_PointSize = 45;
 	g_EyeSpacePos = (uViewMatrix * uWorldMatrix * vec4(_VertexPosition, 1.0)).xyz;
 }
