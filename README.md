@@ -45,6 +45,14 @@ Screen Space Fluid Render is not based on polygonization. SSFR only handles surf
 
 [Reference]: [Screen Space Fluid Render](http://developer.download.nvidia.com/presentations/2010/gdc/Direct3D_Effects.pdf), NVIDIA, 2010.
 
+## Exponential Shadow Map
+
+The major problem of shadow map is aliasing. Filtering the shadow map alleviates aliasing, but unfortunately, native hardware-accelerated filtering cannot be applied, as the shadow test has to take place beforehand. Exponential shadow map can pre-filter shadow map to render high-quality shadows.
+
+<img src="http://7xwp8l.com1.z0.glb.clouddn.com/ESM.png" width="500" height="300" alt="ESM" />
+
+[Reference]: [Exponential Shadowm Maps](http://jankautz.com/publications/esm_gi08.pdf), Thomas Anne, 2008.
+
 ## License
 
 **Graphics** is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
