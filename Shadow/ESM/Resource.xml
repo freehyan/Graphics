@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FRAMEBUFFER type="subconfig">  SRC_SM_FBO
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+ 
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_esm</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>
+
+<FRAMEBUFFER type="subconfig">
+  ESM_FBO
+  <FBO_SIZE type="vec2"> 1280 720 </FBO_SIZE>
+  <FBO_STENCIL type="bool">0</FBO_STENCIL>
+
+  <FBO_ATTACHED_TEXTURE type="subconfig" name="FBO_TEXTURE">
+    <FBO_ATTACHED_TEXTURE_0 type="vecstring">tex_prefilter_z</FBO_ATTACHED_TEXTURE_0>
+  </FBO_ATTACHED_TEXTURE>
+</FRAMEBUFFER>

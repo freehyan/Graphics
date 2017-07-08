@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<EFFECT type="subconfig" name="ESM_EFFECT">
+  <EFFECT_STATE type="string"> ON </EFFECT_STATE>
+  
+  <SHADER1 type="subconfig" name="ESM_SHADOW_MAP_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/0vertShadowMap.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/0fragShadowMap.glsl</FRAGMENT_SHADER>
+  </SHADER1>
+
+  <SHADER2 type="subconfig" name="ESM_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/1vertExponentialShadowMap.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/1fragExponentialShadowMap.glsl</FRAGMENT_SHADER>
+  </SHADER2>
+  
+  <SHADER3 type="subconfig" name="ESM_LIGHT_SHADOW_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/2vertLightShadow.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/2fragLightShadow.glsl</FRAGMENT_SHADER>
+  </SHADER3>
+
+  <SHADER4 type="subconfig" name="ESM_SHOW_SHADOW_MAP_SHADER">
+    <VERTEX_SHADER type="vecstring">shaders/vertShowShadowMap.glsl</VERTEX_SHADER>
+    <FRAGMENT_SHADER type="vecstring">shaders/fragShowShadowMap.glsl</FRAGMENT_SHADER>
+  </SHADER4>
+</EFFECT>

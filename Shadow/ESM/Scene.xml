@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<WINDOW type="subconfig" name="WINDOW">
+  <WIN_WIDTH type="int">1280</WIN_WIDTH>
+  <WIN_HEIGHT type="int">720</WIN_HEIGHT>
+  <WIN_TITLE type="string">Exponential Shadow Map</WIN_TITLE>
+  <WIN_TWEAKBAR type="string"> ANTWEAKBAR </WIN_TWEAKBAR>
+</WINDOW>
+
+<MODEL type="subconfig">PALM
+  <MODEL_FILE type="string">../../Resources/Model/palm/palm.obj</MODEL_FILE>
+</MODEL>
